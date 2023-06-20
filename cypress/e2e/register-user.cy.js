@@ -37,10 +37,7 @@ const incorrectEmail = faker.internet.email();
 const incorrectPassword = faker.internet.password();
 
 describe("Register user test suite", () => {
-  beforeEach(() => {
-    cy.visit("https://www.automationexercise.com/");
-    cy.get('ul.nav.navbar-nav li a[href="/"]').should("exist");
-  });
+
 
   it("Register with valid creds", () => {
     HeaderPage.getSignupLink().click();
@@ -103,5 +100,14 @@ describe("Register user test suite", () => {
     cy.get('form[action="/login"] p')
       .contains("Your email or password is incorrect!")
       .should("be.visible");
+  });
+
+  it.only("Try to register with existing email test", () => {
+    HeaderPage.getSignupLink().click();
+    AuthPage.getSignupTitle().should("exist");
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(loginEmail, { delay: 0 });
+    AuthPage.getSubmitBtn().click();
+    cy.get('form[action="/signup"] p').contains('Email Address already exist!').should('be.visible');
   });
 });
