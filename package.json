@@ -1,0 +1,21 @@
+{
+  "name": "automation-test-with-cypress-for-automationexercise-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "npx cypress open",
+    "cy:chrome:headed": "npx cypress run --browser chrome --headed",
+    "cy:chrome:headless": "npx cypress run --browser chrome",
+    "cy:firefox:headed": "npx cypress run --browser firefox --headed",
+    "cy:cloud": "npx cypress run browser chrome --record --key 076de304-a523-4f2d-9d1d-f99ff18bb6f8"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@testing-library/cypress": "^9.0.0",
+    "cypress": "^12.14.0"
+  }
+}
