@@ -4,7 +4,7 @@ class RegisterFormPage{
   }
 
   getGenderRadioBtn(){
-    return cy.get('#uniform-id_gender2');
+    return cy.get('#id_gender2');
   }
 
   getNameField(){
@@ -55,7 +55,7 @@ class RegisterFormPage{
   }
 
   getCountry(){
-    return cy.get('input[data-qa="country"]');
+    return cy.get('select[data-qa="country"]');
   }
 
   getState(){
@@ -75,15 +75,11 @@ class RegisterFormPage{
   }
 
   getCreateAccountBtn(){
-    return cy.get('input[data-qa="create-account"]');
+    return cy.get('button[data-qa="create-account"]');
   }
 
   getContinueBtn(){
     return cy.get('a[data-qa="continue-button"]');
-  }
-
-  getDismissBtn(){
-    return cy.get('#dismiss-button');
   }
 }
 

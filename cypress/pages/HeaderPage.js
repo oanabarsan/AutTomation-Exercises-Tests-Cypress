@@ -4,11 +4,11 @@ class HeaderPage{
   }
 
   getSignupLink(){
-    return cy.get('ul.nav.navbar-nav li a[href="/login"]');
+    return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
 
   getLogoutLink(){
-    return cy.get('a[href="/logout"]');
+    return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
 
 }

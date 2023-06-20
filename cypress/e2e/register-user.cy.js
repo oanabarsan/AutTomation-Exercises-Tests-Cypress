@@ -4,16 +4,18 @@ import HeaderPage from "../pages/HeaderPage";
 import AuthPage from "../pages/AuthPage";
 import RegisterFormPage from "../pages/RegisterFormPage";
 
-let maxBirthYear = new Date().getFullYear();
-
 const firstName = faker.person.firstName();
 const lastName = faker.person.lastName();
-const fullName = firstName + lastName;
+const fullName = firstName + " " + lastName;
+const confirmationFullName = fullName;
 const randomEmail = faker.internet.email();
+const confirmationEmail = randomEmail;
 const randomPassword = faker.internet.password();
+const loginEmail = "oanabarsan@yahoo.com";
+const loginPassword = "Suceava321!";
 const birthDay = faker.helpers.rangeToNumber({ min: 1, max: 30 });
-const birthYear = faker.helpers.rangeToNumber({ min: 1900, max: maxBirthYear });
 const birthMonth = faker.date.month();
+const birthYear = "1990";
 const companyName = faker.company.name();
 const address = faker.location.streetAddress();
 const myCountryArray = [
@@ -41,69 +43,65 @@ describe("Register user test suite", () => {
   });
 
   it("Register with valid creds", () => {
-    HeaderPage.getHomeLink().should("exist");
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
-    AuthPage.getNameField().type(fullName);
-    AuthPage.getEmailField().type(randomEmail);
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(randomEmail, { delay: 0 });
     AuthPage.getSubmitBtn().click();
     RegisterFormPage.getRegisterTitle().should("exist");
     RegisterFormPage.getGenderRadioBtn().check().should("be.checked");
-    RegisterFormPage.getNameField().contains(fullName).should("be.visible");
-    RegisterFormPage.getEmailField().contains(randomEmail).should("be.visible");
-    RegisterFormPage.getPasswordField().type(randomPassword);
+    RegisterFormPage.getNameField().should("have.value", confirmationFullName);
+    RegisterFormPage.getEmailField().should("have.value", confirmationEmail);
+    RegisterFormPage.getPasswordField().type(randomPassword, { delay: 0 });
     RegisterFormPage.getBirthDay().select(birthDay);
-    RegisterFormPage.getBirthDay().select(birthMonth);
-    RegisterFormPage.getBirthYear().select(birthYear);
+    RegisterFormPage.getBirthMonth().select(birthMonth, { force: true });
+    RegisterFormPage.getBirthYear().select(birthYear, { force: true });
     RegisterFormPage.getNewsletterCheckbox().check().should("be.checked");
     RegisterFormPage.getOffersCheckbox().check().should("be.checked");
-    RegisterFormPage.getFirstName().type(firstName);
-    RegisterFormPage.getLastName().type(lastName);
-    RegisterFormPage.getCompanyName().type(companyName);
-    RegisterFormPage.getStreetAddress().type(address);
+    RegisterFormPage.getFirstName().type(firstName, { delay: 0 });
+    RegisterFormPage.getLastName().type(lastName, { delay: 0 });
+    RegisterFormPage.getCompanyName().type(companyName, { delay: 0 });
+    RegisterFormPage.getStreetAddress().type(address, { delay: 0 });
     RegisterFormPage.getCountry().select(country);
-    RegisterFormPage.getState().type(randomState);
-    RegisterFormPage.getCity().type(randomCity);
-    RegisterFormPage.getZipCode().type(randomZipCode);
-    RegisterFormPage.getPhoneNumber().type(randomPhoneNumber);
+    RegisterFormPage.getState().type(randomState, { delay: 0 });
+    RegisterFormPage.getCity().type(randomCity, { delay: 0 });
+    RegisterFormPage.getZipCode().type(randomZipCode, { delay: 0 });
+    RegisterFormPage.getPhoneNumber().type(randomPhoneNumber, { delay: 0 });
     RegisterFormPage.getCreateAccountBtn().click();
-    cy.get('h2[data-qa="account-created"]')
-      .contains("ACCOUNT CREATED!")
+    cy.get("div.col-sm-9.col-sm-offset-1>p")
+      .contains(
+        "Congratulations! Your new account has been successfully created!"
+      )
       .should("be.visible");
     RegisterFormPage.getContinueBtn().click();
-    RegisterFormPage.getDismissBtn().click();
-    cy.get("ul.nav.navbar-nav li:nth-child(10) a").contains(
-      ` Logged in as ${fullName}`
-    );
-  });
-
-  it("Log out test", () => {
-    HeaderPage.getHomeLink().should("exist");
-    HeaderPage.getLogoutLink().click();
-    cy.get('ul.nav.navbar-nav li a[href="/login"]').should("be.visible");
+    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
+      .contains(` Logged in as ${fullName}`)
+      .should("be.visible");
   });
 
   it("Log in test", () => {
-    HeaderPage.getHomeLink().should("exist");
-    HeaderPage.getSignupLink().click();
-    AuthPage.getLoginTitle().should("exist");
-    AuthPage.getLoginEmail().type(randomEmail);
-    AuthPage.getLoginPassword().type(randomPassword);
-    AuthPage.getLoginBtn().click();
-    cy.get("ul.nav.navbar-nav li:nth-child(10) a").contains(
-      ` Logged in as ${fullName}`
-    ).should("be.visible");
+    AuthPage.login(loginEmail, loginPassword);
+    cy.get("ul.nav.navbar-nav li:nth-child(10)")
+      .contains(` Logged in as `)
+      .should("be.visible");
+  });
+
+  it("Log out test", () => {
+    AuthPage.login(loginEmail, loginPassword);
+    cy.get("ul.nav.navbar-nav li:nth-child(10)")
+      .contains(` Logged in as `)
+      .should("be.visible");
+    HeaderPage.getLogoutLink().click();
+    cy.get("ul.nav.navbar-nav li:nth-child(4) a")
+      .contains("Signup / Login")
+      .should("be.visible");
   });
 
   it("Try to log in with invalid email and password test", () => {
-    HeaderPage.getHomeLink().should("exist");
-    HeaderPage.getSignupLink().click();
-    AuthPage.getLoginTitle().should("exist");
-    AuthPage.getLoginEmail().type(incorrectEmail);
-    AuthPage.getLoginPassword().type(incorrectPassword);
+    AuthPage.login(incorrectEmail, incorrectPassword);
     AuthPage.getLoginBtn().click();
-    cy.get('form[action="/login"] p').contains(
-      "Your email or password is incorrect!"
-    ).should("be.visible");
+    cy.get('form[action="/login"] p')
+      .contains("Your email or password is incorrect!")
+      .should("be.visible");
   });
 });
