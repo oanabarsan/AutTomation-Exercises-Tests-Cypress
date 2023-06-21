@@ -13,6 +13,17 @@ describe("Contact us test suite", () => {
 
   it("Contact us test", () => {
     HeaderPage.getContactUsLink().click();
+    cy.get('div.col-sm-12 h2')
+  .scrollIntoView()
+  .within(() => {
+    cy.window().then((win) => {
+      cy.contains('Contact ').then(($el) => {
+        const before = win.getComputedStyle($el[0], '::before')
+        const beforeContent = before.getPropertyValue('content')
+        expect(beforeContent).to.equal('" "');
+      })
+    })
+  })
     ContactUsPage.getNameField().type(fullName, { delay: 0});
     ContactUsPage.getEmailField().type(randomEmail, { delay: 0});
     ContactUsPage.getSubjectField().type(randomSubject, { delay: 0});
