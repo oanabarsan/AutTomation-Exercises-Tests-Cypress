@@ -3,6 +3,10 @@ class HeaderPage{
     return cy.get('<a[href="/"]');
   }
 
+  getProductsLink(){
+    return cy.get("ul.nav.navbar-nav li:nth-child(2) a");
+  }
+
   getSignupLink(){
     return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
