@@ -7,6 +7,10 @@ class HeaderPage{
     return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
 
+  getTestCaseLink(){
+    return cy.get("ul.nav.navbar-nav li:nth-child(5) a");
+  }
+
   getLogoutLink(){
     return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
