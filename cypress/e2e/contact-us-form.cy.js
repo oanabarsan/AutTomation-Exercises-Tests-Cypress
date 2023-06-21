@@ -7,7 +7,7 @@ const fullName = faker.person.fullName()
 const randomEmail = faker.internet.email();
 const randomSubject = faker.lorem.sentence();
 const randomParagraph = faker.lorem.paragraph();
-const file = "463798.jpg";
+const fileName = "463798.jpg";
 
 describe("Contact us test suite", () => {
 
@@ -17,7 +17,7 @@ describe("Contact us test suite", () => {
     ContactUsPage.getEmailField().type(randomEmail, { delay: 0});
     ContactUsPage.getSubjectField().type(randomSubject, { delay: 0});
     ContactUsPage.getParagraphField().type(randomParagraph, { delay: 0});
-    ContactUsPage.getChooseFileBtn().selectFile("/cypress/fixtures/" + file);
+    ContactUsPage.getChooseFileBtn().selectFile("cypress/fixtures/" + fileName);
     ContactUsPage.getSubmitBtn().click();
     cy.get('div.status.alert.alert-success').contains('Success! Your details have been submitted successfully.').should('be.visible');
   });
