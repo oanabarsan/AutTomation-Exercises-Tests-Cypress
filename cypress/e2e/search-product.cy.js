@@ -4,7 +4,7 @@ import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
 
 describe("Search product test suite", () => {
-  it("Search product by an existing product", () => {
+  it("Search product by an existing product keyword", () => {
     HeaderPage.getProductsLink().click();
     cy.get("div.features_items h2.title.text-center")
       .scrollIntoView()
