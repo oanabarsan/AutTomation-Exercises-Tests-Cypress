@@ -4,6 +4,7 @@ import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
 
 describe("Add to cart test suite", () => {
+
   it("Add to cart first and second product test", () => {
     HeaderPage.getProductsLink().click();
     cy.get("div.features_items h2.title.text-center")
