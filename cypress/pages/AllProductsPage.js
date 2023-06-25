@@ -2,6 +2,11 @@ class AllProductsPage{
   getFirstProduct(){
     return cy.get('a[href="/product_details/1"]').contains('View Product');
   }
+
+  getThirdProduct(){
+    return cy.get('a[href="/product_details/3"]').contains('View Product');
+  }
+
   getAddFirstProduct(){
     return cy.get('div.features_items div.productinfo.text-center:nth-child(1) a[data-product-id="1"]').contains('Add to cart');
   }
