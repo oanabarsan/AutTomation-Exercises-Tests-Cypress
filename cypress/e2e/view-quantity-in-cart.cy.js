@@ -7,9 +7,9 @@ import ThirdProductPage from "../pages/ThirdProductPage";
 const initialQuantity = 1;
 const updatedQuantity = 4;
 
-describe("Add to cart test suite", () => {
+describe("Verify product quantity in cart page test suite", () => {
 
-  it("Add to cart first and second product test", () => {
+  it("Verify product quantity in cart page test", () => {
     HeaderPage.getProductsLink().click();
     cy.get("div.features_items h2.title.text-center")
       .scrollIntoView()
