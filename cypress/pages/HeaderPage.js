@@ -7,6 +7,10 @@ class HeaderPage{
     return cy.get("ul.nav.navbar-nav li:nth-child(2) a");
   }
 
+  getCartLink(){
+    return cy.get("ul.nav.navbar-nav li:nth-child(3) a");
+  }
+
   getSignupLink(){
     return cy.get("ul.nav.navbar-nav li:nth-child(4) a");
   }
