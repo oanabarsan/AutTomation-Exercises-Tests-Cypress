@@ -15,10 +15,6 @@ class ThirdProductPage{
     return cy.get('a.cart_quantity_delete');
   }
 
-  getHereLink(){
-    return cy.get('a[href="/products"]').children('u').should('have.text', "here");
-  }
-
 }
 
 export default new ThirdProductPage();
