@@ -3,6 +3,9 @@
 import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
 
+const priceFirstItem = 500;
+const priceSecondItem = 400;
+
 describe("Add to cart test suite", () => {
 
   it("Add to cart first and second product test", () => {
@@ -54,10 +57,10 @@ describe("Add to cart test suite", () => {
       .contains("Men Tshirt")
       .should("exist");
     cy.get('tr[id="product-1"] td.cart_price p')
-      .contains("Rs. 500")
+      .contains(`Rs. ${priceFirstItem}`)
       .should("be.visible");
     cy.get('tr[id="product-2"] td.cart_price p')
-      .contains("Rs. 400")
+      .contains(`Rs. ${priceSecondItem}`)
       .should("be.visible");
     cy.get('tr[id="product-1"] button.disabled')
       .contains("1")
@@ -66,10 +69,10 @@ describe("Add to cart test suite", () => {
       .contains("1")
       .should("be.visible");
     cy.get('tr[id="product-1"] td.cart_total p')
-      .contains("Rs. 500")
+      .contains(`Rs. ${priceFirstItem}`)
       .should("be.visible");
     cy.get('tr[id="product-2"] td.cart_total p')
-      .contains("Rs. 400")
+      .contains(`Rs. ${priceSecondItem}`)
       .should("be.visible");
   });
 });
