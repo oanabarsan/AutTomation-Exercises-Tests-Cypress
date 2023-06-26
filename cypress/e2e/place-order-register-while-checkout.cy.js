@@ -176,15 +176,10 @@ describe("Place order and register while checkout test suite", () => {
     PaymentPage.getCardCVC().type(cardCVC, { delay :0 });
     PaymentPage.getExpirationMonth().type(randomMonthNumber, { delay :0 });
     PaymentPage.getExpirationYear().type(randomYearNumber, { delay :0 });
-    cy.intercept({
-      method: "GET",
-      url: "https://pagead2.googlesyndication.com/getconfig/sodar?sv=200&tid=gda&tv=r20230620&st=env",
-    }).as("placeOrderAPI");
     PaymentPage.getConfirmOrderBtn().click();
       cy.on("window:confirm", (t) => {
          expect(t).to.equal(" Your order has been placed successfully! ");
       });
-    cy.wait("@placeOrderAPI").its("response.statusCode").should("eq", 200);
     cy.get('div.col-sm-9.col-sm-offset-1 p').contains('Congratulations! Your order has been confirmed!').should('exist');
     HeaderPage.getDeleteAccount().click();
     cy.get('div.col-sm-9.col-sm-offset-1 p:nth-child(2)').contains('Your account has been permanently deleted!').should('be.visible')
