@@ -3,6 +3,7 @@
 import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
 import ThirdProductPage from "../pages/ThirdProductPage";
+import CartPage from "../pages/CartPage";
 
 describe("Delete product from cart page test suite", () => {
 
@@ -14,7 +15,7 @@ describe("Delete product from cart page test suite", () => {
     ThirdProductPage.getViewCartBtn().click();
     ThirdProductPage.getCloseBtn().click();
     cy.get('span[id="empty_cart"] p.text-center').contains(" Click ").children('b').should('have.text', "Cart is empty!");
-    ThirdProductPage.getHereLink().click({ multiple: true });
+    CartPage.getHereLink().click({ multiple: true });
     cy.get("div.features_items h2.title.text-center")
       .scrollIntoView()
       .within(() => {
