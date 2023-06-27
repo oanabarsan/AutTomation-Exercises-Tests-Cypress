@@ -3,7 +3,7 @@
 import HomeCategoryLinksPage from "../pages/HomeCategoryLinksPage";
 import DressCategoryPage from "../pages/DressCategoryPage";
 
-describe("Add to cart test suite", () => {
+describe("Verify category products test suite", () => {
 
   it("Verify category products test", () => {
     cy.get("h4.panel-title a").should(($as) => {
