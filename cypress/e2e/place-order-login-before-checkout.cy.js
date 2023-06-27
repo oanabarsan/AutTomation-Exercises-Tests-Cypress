@@ -7,23 +7,33 @@ import AuthPage from "../pages/AuthPage";
 import { faker } from "@faker-js/faker";
 import CheckoutPage from "../pages/CheckoutPage";
 import PaymentPage from "../pages/PaymentPage";
+import RegisterFormPage from "../pages/RegisterFormPage";
 
-const loginEmail = "boana5762@gmail.com";
-const loginPassword = "Vladi123!";
-const firstName = "Oana";
-const lastName = "Ciobanu";
+const loginEmail = faker.internet.email();;
+const loginPassword = faker.internet.password();
+const firstName = faker.person.firstName();
+const lastName = faker.person.lastName();
 const fullName = firstName + " " + lastName;
 const birthDay = faker.helpers.rangeToNumber({ min: 1, max: 30 });
 const birthMonth = faker.date.month();
 const birthYear = "1990";
 const confirmationFullName = fullName;
-const companyName = faker.company.name();
-const address = "Piata Republicii Street, Bl.D4, Ap.7";
-const country = "India";
-const randomState = "Ilinois";
-const randomCity = "Gura Humorului";
-const randomZipCode = "725300";
-const randomPhoneNumber = "0748648803";
+const address = faker.location.streetAddress();
+const myCountryArray = [
+  "India",
+  "United States",
+  "Canada",
+  "Australia",
+  "Israel",
+  "New Zealand",
+  "Singapore",
+];
+const country =
+  myCountryArray[Math.floor(Math.random() * myCountryArray.length)];
+const randomState = faker.location.state();
+const randomCity = faker.location.city();
+const randomZipCode = faker.location.zipCode();
+const randomPhoneNumber = faker.phone.number();
 const fullAddress =
   randomCity + " " + randomState + "\n\t\t\t\t\t\t\t\t" + randomZipCode;
 const priceFirstItem = 500;
@@ -40,12 +50,12 @@ const randomYearNumber = faker.helpers.rangeToNumber({
 
 describe("Place order and login before checkout test suite", () => {
   before(() => {
+    cy.visit("https://www.automationexercise.com/");
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
     AuthPage.getEmailField().type(loginEmail, { delay: 0 });
     AuthPage.getSubmitBtn().click();
-    RegisterFormPage.getRegisterTitle().should("exist");
     RegisterFormPage.getGenderRadioBtn().check().should("be.checked");
     RegisterFormPage.getNameField().should("have.value", confirmationFullName);
     RegisterFormPage.getEmailField().should("have.value", loginEmail);
@@ -57,7 +67,6 @@ describe("Place order and login before checkout test suite", () => {
     RegisterFormPage.getOffersCheckbox().check().should("be.checked");
     RegisterFormPage.getFirstName().type(firstName, { delay: 0 });
     RegisterFormPage.getLastName().type(lastName, { delay: 0 });
-    RegisterFormPage.getCompanyName().type(companyName, { delay: 0 });
     RegisterFormPage.getStreetAddress().type(address, { delay: 0 });
     RegisterFormPage.getCountry().select(country);
     RegisterFormPage.getState().type(randomState, { delay: 0 });
@@ -77,7 +86,7 @@ describe("Place order and login before checkout test suite", () => {
     HeaderPage.getLogoutLink().click();
   });
 
-  it("Place order and before while checkout test", () => {
+  it("Place order and login before while checkout test", () => {
     HeaderPage.getProductsLink().click();
     AllProductsPage.getAddFirstProduct().click();
     AllProductsPage.getContinueShoppingBtn().click();
