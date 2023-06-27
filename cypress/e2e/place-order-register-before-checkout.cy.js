@@ -50,8 +50,8 @@ const randomYearNumber = faker.helpers.rangeToNumber({
   max: 2030,
 });
 
-describe("Place order and register while checkout test suite", () => {
-  it("Place order and register while checkout test", () => {
+describe("Place order and register before checkout test suite", () => {
+  it("Place order and register before checkout test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getNameField().type(fullName, { delay: 0 });
     AuthPage.getEmailField().type(randomEmail, { delay: 0 });
