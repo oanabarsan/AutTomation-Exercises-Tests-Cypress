@@ -37,8 +37,6 @@ const incorrectEmail = faker.internet.email();
 const incorrectPassword = faker.internet.password();
 
 describe("Register user test suite", () => {
-
-
   it("Register with valid creds", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
@@ -102,12 +100,14 @@ describe("Register user test suite", () => {
       .should("be.visible");
   });
 
-  it.only("Try to register with existing email test", () => {
+  it("Try to register with existing email test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
     AuthPage.getEmailField().type(loginEmail, { delay: 0 });
     AuthPage.getSubmitBtn().click();
-    cy.get('form[action="/signup"] p').contains('Email Address already exist!').should('be.visible');
+    cy.get('form[action="/signup"] p')
+      .contains("Email Address already exist!")
+      .should("be.visible");
   });
 });
