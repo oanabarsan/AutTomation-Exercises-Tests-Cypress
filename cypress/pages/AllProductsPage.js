@@ -30,6 +30,10 @@ class AllProductsPage{
   getSearchBtn(){
     return cy.get('#submit_search');
   }
+
+  getMadameBrandLink(){
+    return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Madame']");
+  }
 }
 
 export default new AllProductsPage();
