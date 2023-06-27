@@ -9,12 +9,17 @@ import CheckoutPage from "../pages/CheckoutPage";
 import PaymentPage from "../pages/PaymentPage";
 
 const loginEmail = "boana5762@gmail.com";
-const loginPassword = "Suceava321!";
-const firstName = "Oana-Maria";
-const lastName = "Barsan";
+const loginPassword = "Vladi123!";
+const firstName = "Oana";
+const lastName = "Ciobanu";
 const fullName = firstName + " " + lastName;
+const birthDay = faker.helpers.rangeToNumber({ min: 1, max: 30 });
+const birthMonth = faker.date.month();
+const birthYear = "1990";
+const confirmationFullName = fullName;
+const companyName = faker.company.name();
 const address = "Piata Republicii Street, Bl.D4, Ap.7";
-const country = "India"
+const country = "India";
 const randomState = "Ilinois";
 const randomCity = "Gura Humorului";
 const randomZipCode = "725300";
@@ -33,13 +38,46 @@ const randomYearNumber = faker.helpers.rangeToNumber({
   max: 2030,
 });
 
-describe("Place order and register while checkout test suite", () => {
-  it("Place order and register while checkout test", () => {
+describe("Place order and login before checkout test suite", () => {
+  before(() => {
     HeaderPage.getSignupLink().click();
-    AuthPage.login(loginEmail, loginPassword);
-    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
-      .contains(` Logged in as `)
+    AuthPage.getSignupTitle().should("exist");
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(loginEmail, { delay: 0 });
+    AuthPage.getSubmitBtn().click();
+    RegisterFormPage.getRegisterTitle().should("exist");
+    RegisterFormPage.getGenderRadioBtn().check().should("be.checked");
+    RegisterFormPage.getNameField().should("have.value", confirmationFullName);
+    RegisterFormPage.getEmailField().should("have.value", loginEmail);
+    RegisterFormPage.getPasswordField().type(loginPassword, { delay: 0 });
+    RegisterFormPage.getBirthDay().select(birthDay);
+    RegisterFormPage.getBirthMonth().select(birthMonth, { force: true });
+    RegisterFormPage.getBirthYear().select(birthYear, { force: true });
+    RegisterFormPage.getNewsletterCheckbox().check().should("be.checked");
+    RegisterFormPage.getOffersCheckbox().check().should("be.checked");
+    RegisterFormPage.getFirstName().type(firstName, { delay: 0 });
+    RegisterFormPage.getLastName().type(lastName, { delay: 0 });
+    RegisterFormPage.getCompanyName().type(companyName, { delay: 0 });
+    RegisterFormPage.getStreetAddress().type(address, { delay: 0 });
+    RegisterFormPage.getCountry().select(country);
+    RegisterFormPage.getState().type(randomState, { delay: 0 });
+    RegisterFormPage.getCity().type(randomCity, { delay: 0 });
+    RegisterFormPage.getZipCode().type(randomZipCode, { delay: 0 });
+    RegisterFormPage.getPhoneNumber().type(randomPhoneNumber, { delay: 0 });
+    RegisterFormPage.getCreateAccountBtn().click();
+    cy.get("div.col-sm-9.col-sm-offset-1>p")
+      .contains(
+        "Congratulations! Your new account has been successfully created!"
+      )
       .should("be.visible");
+    RegisterFormPage.getContinueBtn().click();
+    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
+      .contains(` Logged in as ${fullName}`)
+      .should("be.visible");
+    HeaderPage.getLogoutLink().click();
+  });
+
+  it("Place order and before while checkout test", () => {
     HeaderPage.getProductsLink().click();
     AllProductsPage.getAddFirstProduct().click();
     AllProductsPage.getContinueShoppingBtn().click();
@@ -76,6 +114,13 @@ describe("Place order and register while checkout test suite", () => {
     cy.get('tr[id="product-2"] td.cart_total p')
       .contains(`Rs. ${priceSecondItem}`)
       .should("be.visible");
+    CartPage.getProceedToCheckoutBtn().click();
+    CartPage.getRegisterLoginLink().click();
+    AuthPage.login(loginEmail, loginPassword);
+    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
+      .contains(` Logged in as `)
+      .should("be.visible");
+    HeaderPage.getCartLink().click();
     CartPage.getProceedToCheckoutBtn().click();
     cy.get("div.step-one h2.heading")
       .contains("Address Details")
