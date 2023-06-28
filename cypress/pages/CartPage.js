@@ -11,6 +11,10 @@ class CartPage{
   getRegisterLoginLink(){
     return cy.get('a[href="/login"]').children('u').should('have.text', "Register / Login");
   }
+
+  getCloseBtn(){
+    return cy.get('a.cart_quantity_delete');
+  }
 }
 
 export default new CartPage();
