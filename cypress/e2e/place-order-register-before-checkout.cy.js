@@ -1,11 +1,11 @@
 /// <reference types = "cypress" />
 
+import { faker } from "@faker-js/faker";
 import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
 import CartPage from "../pages/CartPage";
 import AuthPage from "../pages/AuthPage";
 import RegisterFormPage from "../pages/RegisterFormPage";
-import { faker } from "@faker-js/faker";
 import CheckoutPage from "../pages/CheckoutPage";
 import PaymentPage from "../pages/PaymentPage";
 
