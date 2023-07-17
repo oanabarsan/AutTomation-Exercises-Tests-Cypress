@@ -24,6 +24,10 @@ class ContactUsPage{
     return cy.get('input[data-qa="submit-button"]');
   }
 
+  getHomeBtn(){
+    return cy.get('a.btn.btn-success');
+  }
+
 }
 
 export default new ContactUsPage();
