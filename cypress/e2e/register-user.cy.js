@@ -72,7 +72,7 @@ describe("Register user test suite", () => {
       .should("be.visible");
   });
 
-  it.only("Log out after register test", () => {
+  it("Log out after register test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
