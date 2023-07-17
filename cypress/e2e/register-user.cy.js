@@ -72,6 +72,47 @@ describe("Register user test suite", () => {
       .should("be.visible");
   });
 
+  it.only("Log out after register test", () => {
+    HeaderPage.getSignupLink().click();
+    AuthPage.getSignupTitle().should("exist");
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(randomEmail, { delay: 0 });
+    AuthPage.getSubmitBtn().click();
+    RegisterFormPage.getRegisterTitle().should("exist");
+    RegisterFormPage.getGenderRadioBtn().check().should("be.checked");
+    RegisterFormPage.getNameField().should("have.value", confirmationFullName);
+    RegisterFormPage.getEmailField().should("have.value", confirmationEmail);
+    RegisterFormPage.getPasswordField().type(randomPassword, { delay: 0 });
+    RegisterFormPage.getBirthDay().select(birthDay);
+    RegisterFormPage.getBirthMonth().select(birthMonth, { force: true });
+    RegisterFormPage.getBirthYear().select(birthYear, { force: true });
+    RegisterFormPage.getNewsletterCheckbox().check().should("be.checked");
+    RegisterFormPage.getOffersCheckbox().check().should("be.checked");
+    RegisterFormPage.getFirstName().type(firstName, { delay: 0 });
+    RegisterFormPage.getLastName().type(lastName, { delay: 0 });
+    RegisterFormPage.getCompanyName().type(companyName, { delay: 0 });
+    RegisterFormPage.getStreetAddress().type(address, { delay: 0 });
+    RegisterFormPage.getCountry().select(country);
+    RegisterFormPage.getState().type(randomState, { delay: 0 });
+    RegisterFormPage.getCity().type(randomCity, { delay: 0 });
+    RegisterFormPage.getZipCode().type(randomZipCode, { delay: 0 });
+    RegisterFormPage.getPhoneNumber().type(randomPhoneNumber, { delay: 0 });
+    RegisterFormPage.getCreateAccountBtn().click();
+    cy.get("div.col-sm-9.col-sm-offset-1>p")
+      .contains(
+        "Congratulations! Your new account has been successfully created!"
+      )
+      .should("be.visible");
+    RegisterFormPage.getContinueBtn().click();
+    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
+      .contains(` Logged in as ${fullName}`)
+      .should("be.visible");
+      HeaderPage.getLogoutLink().click();
+    cy.get("ul.nav.navbar-nav li:nth-child(4) a")
+      .contains("Signup / Login")
+      .should("be.visible");
+  });
+
   it("Try to register with existing email test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");

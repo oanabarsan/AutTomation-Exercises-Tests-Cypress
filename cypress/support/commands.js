@@ -8,3 +8,5 @@ Cypress.Commands.add('login',(loginEmail, loginPassword) =>{
   AuthPage.getLoginPassword().type(loginPassword, { delay: 0 });
   AuthPage.getLoginBtn().click();
 });
+
+

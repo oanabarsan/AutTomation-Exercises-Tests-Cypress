@@ -16,7 +16,9 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
     "@testing-library/cypress": "^9.0.0",
+    "cy-verify-downloads": "^0.1.15",
     "cypress": "^12.14.0",
+    "cypress-downloadfile": "^1.2.3",
     "cypress-iframe": "^1.0.1"
   }
 }

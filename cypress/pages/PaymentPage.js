@@ -22,6 +22,10 @@ class PaymentPage{
   getConfirmOrderBtn(){
     return cy.get('button[data-qa="pay-button"]')
   }
+
+  getDownloadInvoiceBtn(){
+    return cy.get('div.col-sm-9.col-sm-offset-1 a[href="/download_invoice/500"]').contains('Download Invoice');
+  }
 }
 
 export default new PaymentPage();
