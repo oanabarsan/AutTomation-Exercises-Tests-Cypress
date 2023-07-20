@@ -19,6 +19,10 @@ class HeaderPage{
     return cy.get("ul.nav.navbar-nav li:nth-child(5) a");
   }
 
+  getApiTestLink(){
+    return cy.get('ul.nav.navbar-nav li:nth-child(6) a')
+  }
+
   getDeleteAccount(){
     return cy.get("ul.nav.navbar-nav li:nth-child(5) a[href='/delete_account']");
   }
