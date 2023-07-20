@@ -11,6 +11,7 @@ const jpgFile = "463798.jpg";
 const wordFile = "test.docx";
 const pdfFile = "test.pdf";
 const xlsxFile = "test.xlsx";
+const gifImage = "test.gif";
 
 describe("Choose file functionality with different type of documents test suite", () => {
   
@@ -69,6 +70,13 @@ describe("Choose file functionality with different type of documents test suite"
       .should("be.visible");
   });
 
+  it.only("Choose file with GIF image test", () => {
+    
+    ContactUsPage.getChooseFileBtn().selectFile("cypress/fixtures/" + gifImage);
+    ContactUsPage.getSubmitBtn().click();
+    cy.get("div.status.alert.alert-success")
+      .contains("Success! Your details have been submitted successfully.")
+      .should("be.visible");
+  });
 
-  
 });
