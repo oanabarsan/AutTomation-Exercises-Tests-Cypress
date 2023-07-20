@@ -110,7 +110,7 @@ describe("Choose file functionality with different type of documents test suite"
       .should("be.visible");
   });
 
-  it.only("Choose file with ZIP file test", () => {
+  it("Choose file with ZIP file test", () => {
     
     ContactUsPage.getChooseFileBtn().selectFile("cypress/fixtures/" + zipFile);
     ContactUsPage.getSubmitBtn().click();
@@ -118,5 +118,10 @@ describe("Choose file functionality with different type of documents test suite"
       .contains("Success! Your details have been submitted successfully.")
       .should("be.visible");
   });
+
+  afterEach(()=>{
+    ContactUsPage.getHomeBtn().click();
+    cy.get('div.col-sm-6 h2').contains('Full-Fledged practice website ').should('be.visible');
+  })
 
 });
