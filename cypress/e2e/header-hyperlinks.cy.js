@@ -28,4 +28,9 @@ describe("Header hyperlinks test suite", () => {
     HeaderPage.getCartLink().click();
     cy.get("p.text-center b").contains("Cart is empty!").should("be.visible");
   });
+
+  it("Signup/Login page hyperlink test", () => {
+    HeaderPage.getSignupLink().click();
+    cy.get('h2').contains('New User Signup!').should('be.visible');
+  });
 });
