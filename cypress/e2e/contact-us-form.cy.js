@@ -34,7 +34,7 @@ describe("Contact us form test suite", () => {
       .should("be.visible");
   });
 
-  it.only("Go to home page after submitting contact us form test", () => {
+  it("Go to home page after submitting contact us form test", () => {
     HeaderPage.getContactUsLink().click();
     cy.get("div.col-sm-12 h2")
       .scrollIntoView()
