@@ -1,6 +1,6 @@
 class HeaderPage{
   getHomeLink(){
-    return cy.get('<a[href="/"]');
+    return cy.get('ul.nav.navbar-nav li:nth-child(1) a');
   }
 
   getProductsLink(){
@@ -21,6 +21,10 @@ class HeaderPage{
 
   getApiTestLink(){
     return cy.get('ul.nav.navbar-nav li:nth-child(6) a')
+  }
+
+  getVideoTutorialLink(){
+    return cy.get('ul.nav.navbar-nav li:nth-child(7) a')
   }
 
   getDeleteAccount(){
