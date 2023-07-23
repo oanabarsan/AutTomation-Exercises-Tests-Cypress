@@ -38,6 +38,10 @@ class CarouselHomePage {
   getPrevArrow(){
     return cy.get('div.carousel.slide a[href="#slider-carousel"][data-slide="prev"]');
   }
+
+  getNextArrow(){
+    return cy.get('div.carousel.slide a[href="#slider-carousel"][data-slide="next"]');
+  }
 }
 
 export default new CarouselHomePage();
