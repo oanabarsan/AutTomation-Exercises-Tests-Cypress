@@ -1,10 +1,10 @@
 /// <reference types = "cypress" />
 
-import CarouselHomePage from "../pages/CarouselHomePage";
+import TopCarouselHomePage from "../pages/TopCarouselHomePage";
 
 describe("APIs button functionality in carousel home page test suite", () => {
   it("APIs button functionality located in first carousel image test", () => {
-    CarouselHomePage.getFirstAPIsBtn().click();
+    TopCarouselHomePage.getFirstAPIsBtn().click();
     cy.get("div.col-sm-9 h2.title.text-center")
     .scrollIntoView()
     .within(() => {
@@ -19,7 +19,7 @@ describe("APIs button functionality in carousel home page test suite", () => {
   });
 
   it("APIs button functionality located in second carousel image test", () => {
-    CarouselHomePage.getSecondAPIsBtn().click();
+    TopCarouselHomePage.getSecondAPIsBtn().click();
     cy.get("div.col-sm-9 h2.title.text-center")
     .scrollIntoView()
     .within(() => {
@@ -34,7 +34,7 @@ describe("APIs button functionality in carousel home page test suite", () => {
   });
 
   it("APIs button functionality located in third carousel image test", () => {
-    CarouselHomePage.getThirdAPIsBtn().click();
+    TopCarouselHomePage.getThirdAPIsBtn().click();
     cy.get("div.col-sm-9 h2.title.text-center")
     .scrollIntoView()
     .within(() => {

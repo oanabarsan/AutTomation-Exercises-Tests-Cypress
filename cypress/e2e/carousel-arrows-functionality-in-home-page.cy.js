@@ -1,23 +1,23 @@
 /// <reference types = "cypress" />
 
-import CarouselHomePage from "../pages/CarouselHomePage";
+import TopCarouselHomePage from "../pages/TopCarouselHomePage";
 
 describe("Carousel arrows functionality test suite", () => {
   it("Prev arrow carousel test", () => {
-    CarouselHomePage.getPrevArrow().click();
+    TopCarouselHomePage.getPrevArrow().click();
     cy.get('img[src="/static/images/home/girl1.jpg"]').should("exist");
-    CarouselHomePage.getPrevArrow().click();
+    TopCarouselHomePage.getPrevArrow().click();
     cy.get('img[src="/static/images/home/girl3.jpg"]').should("exist");
-    CarouselHomePage.getPrevArrow().click();
+    TopCarouselHomePage.getPrevArrow().click();
     cy.get('img[src="/static/images/home/girl2.jpg"]').should("exist");
   });
 
   it("Next arrow carousel test", () => {
-    CarouselHomePage.getNextArrow().click();
+    TopCarouselHomePage.getNextArrow().click();
     cy.get('img[src="/static/images/home/girl3.jpg"]').should("exist");
-    CarouselHomePage.getPrevArrow().click();
+    TopCarouselHomePage.getPrevArrow().click();
     cy.get('img[src="/static/images/home/girl1.jpg"]').should("exist");
-    CarouselHomePage.getPrevArrow().click();
+    TopCarouselHomePage.getPrevArrow().click();
     cy.get('img[src="/static/images/home/girl2.jpg"]').should("exist");
   });
 });

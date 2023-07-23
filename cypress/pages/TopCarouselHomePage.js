@@ -1,4 +1,4 @@
-class CarouselHomePage {
+class TopCarouselHomePage {
   getFirstTestCaseBtn() {
     return cy
       .get("div.col-sm-6:nth-child(1) a[href='/test_cases']")
@@ -44,4 +44,4 @@ class CarouselHomePage {
   }
 }
 
-export default new CarouselHomePage();
+export default new TopCarouselHomePage();
