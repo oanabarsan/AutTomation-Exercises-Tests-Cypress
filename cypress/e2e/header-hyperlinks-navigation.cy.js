@@ -69,6 +69,21 @@ describe("Header hyperlinks navigation test suite", () => {
       });
   });
 
+  it("Video Tutorials page hyperlink test", () => {
+    HeaderPage.getVideoTutorialLink().click();
+    cy.origin("https://consent.youtube.com", () => {
+      cy.visit("https://www.youtube.com/c/AutomationExercise");
+      cy.get(
+        "div.qqtRac button.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-k8QpJ.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.nCP5yc.AjY5Oe.DuMIQc.LQeN7.IIdkle span"
+      )
+        .contains("Acceptă tot")
+        .click();
+    });
+    cy.origin("https://www.youtube.com", () => {
+      cy.visit("https://www.youtube.com/c/AutomationExercise");
+      cy.get("#text").contains("AutomationExercise").should("be.visible");
+    });
+  });
 
   it("Contact us page hyperlink test", () => {
     HeaderPage.getContactUsLink().click();
