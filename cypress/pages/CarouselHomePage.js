@@ -34,6 +34,10 @@ class CarouselHomePage {
       .get('div.carousel-inner div.item:nth-child(3) div.col-sm-6 a[href="/api_list"]')
       .contains("APIs list for practice");
   }
+
+  getPrevArrow(){
+    return cy.get('div.carousel.slide a[href="#slider-carousel"][data-slide="prev"]');
+  }
 }
 
 export default new CarouselHomePage();
