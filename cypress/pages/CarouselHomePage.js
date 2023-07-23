@@ -22,6 +22,12 @@ class CarouselHomePage {
       .get('div.carousel-inner div.item:nth-child(1) div.col-sm-6 a[href="/api_list"]')
       .contains("APIs list for practice");
   }
+
+  getSecondAPIsBtn() {
+    return cy
+      .get('div.carousel-inner div.item:nth-child(2) div.col-sm-6 a[href="/api_list"]')
+      .contains("APIs list for practice");
+  }
 }
 
 export default new CarouselHomePage();
