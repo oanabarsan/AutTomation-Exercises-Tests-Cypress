@@ -46,6 +46,14 @@ class TopCarouselHomePage {
   getTopCarousel(){
     return cy.get('div.carousel-inner');
   }
+
+  getBottomPrevArrow(){
+    return cy.get('div.carousel.slide a[href="#recommended-item-carousel"][data-slide="prev"]');
+  }
+
+  getBottomNextArrow(){
+    return cy.get('div.carousel.slide a[href="#recommended-item-carousel"][data-slide="next"]');
+  }
 }
 
 export default new TopCarouselHomePage();
