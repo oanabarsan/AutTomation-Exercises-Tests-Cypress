@@ -16,6 +16,12 @@ class CarouselHomePage {
       .get('div.carousel-inner div.item:nth-child(3) div.col-sm-6 a[href="/test_cases"]')
       .contains("Test Cases");
   }
+
+  getFirstAPIsBtn() {
+    return cy
+      .get('div.carousel-inner div.item:nth-child(1) div.col-sm-6 a[href="/api_list"]')
+      .contains("APIs list for practice");
+  }
 }
 
 export default new CarouselHomePage();
