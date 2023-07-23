@@ -42,6 +42,10 @@ class TopCarouselHomePage {
   getNextArrow(){
     return cy.get('div.carousel.slide a[href="#slider-carousel"][data-slide="next"]');
   }
+
+  getTopCarousel(){
+    return cy.get('div.carousel-inner');
+  }
 }
 
 export default new TopCarouselHomePage();
