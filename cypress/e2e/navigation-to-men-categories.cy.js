@@ -2,7 +2,7 @@
 
 import HomeCategoryLinksPage from "../pages/HomeCategoryLinksPage";
 
-describe("Navigation to Women categories in home page test suite", () => {
+describe("Navigation to Men categories in home page test suite", () => {
   beforeEach(() => {
     HomeCategoryLinksPage.getMenCategoryLink().click();
   });
