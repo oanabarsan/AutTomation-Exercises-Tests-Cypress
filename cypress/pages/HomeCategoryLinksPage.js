@@ -26,6 +26,14 @@ class HomeCategoryLinksPage{
   getJeansCategory(){
     return cy.get('div[id="Men"] div.panel-body ul li a[href="/category_products/6"]');
   }
+
+  getKidsCategoryLink(){
+    return cy.get('h4 a[href="#Kids"] span');
+  }
+
+  getKidsDressCategory(){
+    return cy.get('div[id="Kids"] div.panel-body ul li a[href="/category_products/4"]');
+  }
 }
 
 export default new HomeCategoryLinksPage();
