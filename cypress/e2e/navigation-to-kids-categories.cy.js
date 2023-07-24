@@ -20,5 +20,20 @@ describe("Navigation to Kids categories in home page test suite", () => {
         });
       });
   });
+  it("Navigate to Tops & Shirts category test", () => {
+    HomeCategoryLinksPage.getTopsShirtsCategory().click();
+    cy.get("div.features_items h2.title.text-center")
+      .scrollIntoView()
+      .within(() => {
+        cy.window().then((win) => {
+          cy.contains("Kids - Tops & Shirts Products").then(($el) => {
+            const before = win.getComputedStyle($el[0], "::before");
+            const beforeContent = before.getPropertyValue("content");
+            expect(beforeContent).to.equal('" "');
+          });
+        });
+      });
+  });
+
 
 });
