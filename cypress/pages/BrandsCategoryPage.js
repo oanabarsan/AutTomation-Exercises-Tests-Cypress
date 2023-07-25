@@ -10,6 +10,10 @@ class BrandsCategoryPage{
   getMadameBrandLink(){
     return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Madame']");
   }
+
+  getMastAndHarbourBrandLink(){
+    return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Mast & Harbour']");
+  }
 }
 
 export default new BrandsCategoryPage();
