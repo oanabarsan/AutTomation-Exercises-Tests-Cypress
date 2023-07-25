@@ -2,7 +2,7 @@
 
 import HeaderPage from "../pages/HeaderPage";
 import AllProductsPage from "../pages/AllProductsPage";
-import MadameBrandPage from "../pages/MadameBrandPage";
+import BrandsCategoryPage from "../pages/BrandsCategoryPage";
 
 describe("Verify category brands test suite", () => {
 
@@ -31,7 +31,7 @@ describe("Verify category brands test suite", () => {
         });
       });
     });
-    MadameBrandPage.getPoloBrandLink().click();
+    BrandsCategoryPage.getPoloBrandLink().click();
     cy.get("div.features_items h2.title.text-center")
     .scrollIntoView()
     .within(() => {
