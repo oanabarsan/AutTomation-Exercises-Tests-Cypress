@@ -6,6 +6,10 @@ class BrandsCategoryPage{
   getHnMBrandLink(){
     return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/H&M']");
   }
+
+  getMadameBrandLink(){
+    return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Madame']");
+  }
 }
 
 export default new BrandsCategoryPage();
