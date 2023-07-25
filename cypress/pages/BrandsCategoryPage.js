@@ -18,6 +18,10 @@ class BrandsCategoryPage{
   getBabyhugBrandLink(){
     return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Babyhug']");
   }
+
+  getAllenSollyJuniorBrandLink(){
+    return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Allen Solly Junior']");
+  }
 }
 
 export default new BrandsCategoryPage();
