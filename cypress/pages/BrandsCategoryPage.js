@@ -26,6 +26,10 @@ class BrandsCategoryPage{
   getKookieKidsBrandLink(){
     return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Kookie Kids']");
   }
+
+  getBibaBrandLink(){
+    return cy.get("ul.nav.nav-pills.nav-stacked li a[href='/brand_products/Biba']");
+  }
 }
 
 export default new BrandsCategoryPage();
