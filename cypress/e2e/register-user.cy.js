@@ -373,7 +373,7 @@ describe("Register user test suite", () => {
     .should("exist");
   });
 
-  it.only("Try to register with no required field filled test", () => {
+  it("Try to register with no required field filled test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
