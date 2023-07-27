@@ -194,7 +194,7 @@ describe("Register user test suite", () => {
       .should("exist");
   });
 
-  it("Try to register with no name inserted in name field for address section test", () => {
+  it("Try to register with no first name inserted in first name field for address section test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
@@ -343,7 +343,7 @@ describe("Register user test suite", () => {
     .should("exist");
   });
 
-  it.only("Try to register with no mobile phone number inserted in mobile phone field for address information section test", () => {
+  it("Try to register with no mobile phone number inserted in mobile phone field for address information section test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
@@ -371,5 +371,18 @@ describe("Register user test suite", () => {
     cy.get("p.required.form-group input[data-qa='mobile_number']:invalid")
     .invoke("prop", "validationMessage")
     .should("exist");
+  });
+
+  it.only("Try to register with no required field filled test", () => {
+    HeaderPage.getSignupLink().click();
+    AuthPage.getSignupTitle().should("exist");
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(randomEmail, { delay: 0 });
+    AuthPage.getSubmitBtn().click();
+    RegisterFormPage.getRegisterTitle().should("exist");
+    RegisterFormPage.getCreateAccountBtn().click();
+    cy.get("div.required.form-group input[data-qa='password']:invalid")
+      .invoke("prop", "validationMessage")
+      .should("exist");
   });
 });
