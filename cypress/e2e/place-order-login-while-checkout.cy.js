@@ -541,11 +541,11 @@ describe("Place order and login while checkout test suite", () => {
     PaymentPage.getExpirationMonth().type(randomMonthNumber, { delay: 0 });
     PaymentPage.getExpirationYear().type(randomYearNumber, { delay: 0 });
     PaymentPage.getConfirmOrderBtn().click();
-    cy.get('div.col-sm-12.form-group input[data-qa="cvc"]')
+    cy.get('div.col-sm-4.form-group.cvc input[data-qa="cvc"]')
     .invoke("prop", "validationMessage")
     .should("exist");
-
-    it("Place order with month inserted in expiration month field test", () => {
+  });
+  it("Place order with month inserted in expiration month field test", () => {
       HeaderPage.getProductsLink().click();
       AllProductsPage.getAddFirstProduct().click();
       AllProductsPage.getContinueShoppingBtn().click();
@@ -653,11 +653,11 @@ describe("Place order and login while checkout test suite", () => {
       PaymentPage.getCardCVC().type(cardCVC, { delay: 0 });
       PaymentPage.getExpirationYear().type(randomYearNumber, { delay: 0 });
       PaymentPage.getConfirmOrderBtn().click();
-      cy.get('div.col-sm-12.form-group input[data-qa="expiry-month"]')
+      cy.get('div.col-sm-4.form-group.expiration input[data-qa="expiry-month"]')
       .invoke("prop", "validationMessage")
       .should("exist");
     });
-  });
+
   it("Try to place order with no year inserted in expiration year field test", () => {
     HeaderPage.getProductsLink().click();
     AllProductsPage.getAddFirstProduct().click();
@@ -765,9 +765,8 @@ describe("Place order and login while checkout test suite", () => {
     PaymentPage.getCardNumberField().type(cardNumber, { delay: 0 });
     PaymentPage.getCardCVC().type(cardCVC, { delay: 0 });
     PaymentPage.getExpirationMonth().type(randomMonthNumber, { delay: 0 });
-    PaymentPage.getExpirationYear().type(randomYearNumber, { delay: 0 });
     PaymentPage.getConfirmOrderBtn().click();
-    cy.get('div.col-sm-12.form-group input[data-qa="expiry-year"]')
+    cy.get('div.col-sm-4.form-group.expiration input[data-qa="expiry-year"]')
     .invoke("prop", "validationMessage")
     .should("exist");
   });
