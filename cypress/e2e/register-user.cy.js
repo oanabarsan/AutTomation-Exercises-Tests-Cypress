@@ -164,7 +164,7 @@ describe("Register user test suite", () => {
       .should("exist");
   });
 
-  it.only("Try to register with no password inserted in password field test", () => {
+  it("Try to register with no password inserted in password field test", () => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
@@ -190,6 +190,36 @@ describe("Register user test suite", () => {
     RegisterFormPage.getPhoneNumber().type(randomPhoneNumber, { delay: 0 });
     RegisterFormPage.getCreateAccountBtn().click();
     cy.get("div.required.form-group input[data-qa='password']:invalid")
+      .invoke("prop", "validationMessage")
+      .should("exist");
+  });
+
+  it("Try to register with no name inserted in name field for address section test", () => {
+    HeaderPage.getSignupLink().click();
+    AuthPage.getSignupTitle().should("exist");
+    AuthPage.getNameField().type(fullName, { delay: 0 });
+    AuthPage.getEmailField().type(randomEmail, { delay: 0 });
+    AuthPage.getSubmitBtn().click();
+    RegisterFormPage.getRegisterTitle().should("exist");
+    RegisterFormPage.getGenderRadioBtn().check().should("be.checked");
+    RegisterFormPage.getNameField().should("have.value", confirmationFullName);
+    RegisterFormPage.getEmailField().should("have.value", confirmationEmail);
+    RegisterFormPage.getPasswordField().type(randomPassword, { delay: 0 });
+    RegisterFormPage.getBirthDay().select(birthDay);
+    RegisterFormPage.getBirthMonth().select(birthMonth, { force: true });
+    RegisterFormPage.getBirthYear().select(birthYear, { force: true });
+    RegisterFormPage.getNewsletterCheckbox().check().should("be.checked");
+    RegisterFormPage.getOffersCheckbox().check().should("be.checked");
+    RegisterFormPage.getLastName().type(lastName, { delay: 0 });
+    RegisterFormPage.getCompanyName().type(companyName, { delay: 0 });
+    RegisterFormPage.getStreetAddress().type(address, { delay: 0 });
+    RegisterFormPage.getCountry().select(country);
+    RegisterFormPage.getState().type(randomState, { delay: 0 });
+    RegisterFormPage.getCity().type(randomCity, { delay: 0 });
+    RegisterFormPage.getZipCode().type(randomZipCode, { delay: 0 });
+    RegisterFormPage.getPhoneNumber().type(randomPhoneNumber, { delay: 0 });
+    RegisterFormPage.getCreateAccountBtn().click();
+    cy.get("p.required.form-group input[data-qa='first_name']:invalid")
       .invoke("prop", "validationMessage")
       .should("exist");
   });
