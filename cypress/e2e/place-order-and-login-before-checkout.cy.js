@@ -48,8 +48,7 @@ const randomYearNumber = faker.helpers.rangeToNumber({
 });
 
 describe("Place order and login while checkout test suite", () => {
-  before(() => {
-    cy.visit("https://www.automationexercise.com/");
+  beforeEach(() => {
     HeaderPage.getSignupLink().click();
     AuthPage.getSignupTitle().should("exist");
     AuthPage.getNameField().type(fullName, { delay: 0 });
@@ -311,7 +310,10 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-12.form-group input[data-qa="name-on-card"]')
     .invoke("prop", "validationMessage")
     .should("exist");
-
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
   });
 
   it("Try to place order with no card number inserted in card number field test", () => {
@@ -422,6 +424,10 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-12.form-group input[data-qa="card-number"]')
     .invoke("prop", "validationMessage")
     .should("exist");
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
   });
 
   it("Try to place order with no CVC inserted in CVC field test", () => {
@@ -532,6 +538,10 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-4.form-group.cvc input[data-qa="cvc"]')
     .invoke("prop", "validationMessage")
     .should("exist");
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
   });
   it("Place order with month inserted in expiration month field test", () => {
     AuthPage.login(loginEmail, loginPassword);
@@ -641,6 +651,10 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-4.form-group.expiration input[data-qa="expiry-month"]')
     .invoke("prop", "validationMessage")
     .should("exist");
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
     });
 
   it("Try to place order with no year inserted in expiration year field test", () => {
@@ -751,6 +765,10 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-4.form-group.expiration input[data-qa="expiry-year"]')
     .invoke("prop", "validationMessage")
     .should("exist");
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
   });
 
   it("Try to place order with no required field filled in payment page test", () => {
@@ -857,5 +875,9 @@ describe("Place order and login while checkout test suite", () => {
     cy.get('div.col-sm-12.form-group input[data-qa="name-on-card"]')
     .invoke("prop", "validationMessage")
     .should("exist");
+    HeaderPage.getDeleteAccount().click();
+    cy.get("div.col-sm-9.col-sm-offset-1 p:nth-child(2)")
+      .contains("Your account has been permanently deleted!")
+      .should("be.visible");
   });
 });
