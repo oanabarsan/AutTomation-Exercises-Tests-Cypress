@@ -754,7 +754,108 @@ describe("Place order and login while checkout test suite", () => {
   });
 
   it("Try to place order with no required field filled in payment page test", () => {
-   
-
+    AuthPage.login(loginEmail, loginPassword);
+    cy.get("ul.nav.navbar-nav li:nth-child(10) a")
+      .contains(` Logged in as `)
+      .should("be.visible");
+    HeaderPage.getProductsLink().click();
+    AllProductsPage.getAddFirstProduct().click();
+    AllProductsPage.getContinueShoppingBtn().click();
+    AllProductsPage.getAddSecondProduct().click();
+    AllProductsPage.getViewCartBtn().click();
+    cy.get("tr.cart_menu td").should(($tds) => {
+      expect($tds).to.have.length(6);
+      expect($tds[0]).to.have.text("Item");
+      expect($tds[1]).to.have.text("Description");
+      expect($tds[2]).to.have.text("Price");
+      expect($tds[3]).to.have.text("Quantity");
+      expect($tds[4]).to.have.text("Total");
+      expect($tds[5]).to.have.text("");
+    });
+    cy.get('a[href="/product_details/1"]').contains("Blue Top").should("exist");
+    cy.get('a[href="/product_details/2"]')
+      .contains("Men Tshirt")
+      .should("exist");
+    cy.get('tr[id="product-1"] td.cart_price p')
+      .contains(`Rs. ${priceFirstItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-2"] td.cart_price p')
+      .contains(`Rs. ${priceSecondItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-1"] button.disabled')
+      .contains("1")
+      .should("be.visible");
+    cy.get('tr[id="product-2"] button.disabled')
+      .contains("1")
+      .should("be.visible");
+    cy.get('tr[id="product-1"] td.cart_total p')
+      .contains(`Rs. ${priceFirstItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-2"] td.cart_total p')
+      .contains(`Rs. ${priceSecondItem}`)
+      .should("be.visible");
+    CartPage.getProceedToCheckoutBtn().click();
+    cy.get("div.step-one h2.heading")
+      .contains("Address Details")
+      .should("exist");
+    cy.get("ul.address.item.box li").should(($lis) => {
+      expect($lis).to.have.length(8);
+      expect($lis[0]).to.have.attr("class", "address_title");
+      expect($lis[1]).to.have.text(`Mrs. ${fullName}`);
+      expect($lis[2]).to.have.text("");
+      expect($lis[3]).to.have.text(address);
+      expect($lis[4]).to.have.text("");
+      expect($lis[5]).to.have.text(fullAddress);
+      expect($lis[6]).to.have.text(country);
+      expect($lis[7]).to.have.text(randomPhoneNumber);
+    });
+    cy.get("ul.address.alternate_item.box li").should(($lis) => {
+      expect($lis).to.have.length(8);
+      expect($lis[0]).to.have.attr("class", "address_title");
+      expect($lis[1]).to.have.text(`Mrs. ${fullName}`);
+      expect($lis[2]).to.have.text("");
+      expect($lis[3]).to.have.text(address);
+      expect($lis[4]).to.have.text("");
+      expect($lis[5]).to.have.text(fullAddress);
+      expect($lis[6]).to.have.text(country);
+      expect($lis[7]).to.have.text(randomPhoneNumber);
+    });
+    cy.get("div.step-one h2.heading")
+      .contains("Review Your Order")
+      .should("exist");
+    cy.get('a[href="/product_details/1"]').contains("Blue Top").should("exist");
+    cy.get('a[href="/product_details/2"]')
+      .contains("Men Tshirt")
+      .should("exist");
+    cy.get('tr[id="product-1"] td.cart_price p')
+      .contains(`Rs. ${priceFirstItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-2"] td.cart_price p')
+      .contains(`Rs. ${priceSecondItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-1"] button.disabled')
+      .contains("1")
+      .should("be.visible");
+    cy.get('tr[id="product-2"] button.disabled')
+      .contains("1")
+      .should("be.visible");
+    cy.get('tr[id="product-1"] td.cart_total p')
+      .contains(`Rs. ${priceFirstItem}`)
+      .should("be.visible");
+    cy.get('tr[id="product-2"] td.cart_total p')
+      .contains(`Rs. ${priceSecondItem}`)
+      .should("be.visible");
+    cy.get('td[colspan="2"] h4')
+      .children("b")
+      .should("have.text", "Total Amount");
+    cy.get("td p.cart_total_price")
+      .contains(`Rs. ${totalPrice}`)
+      .should("be.visible");
+    CheckoutPage.getMessageField().type(additionalComment, { delay: 0 });
+    CheckoutPage.getPlaceOrderBtn().click();
+    PaymentPage.getConfirmOrderBtn().click();
+    cy.get('div.col-sm-12.form-group input[data-qa="name-on-card"]')
+    .invoke("prop", "validationMessage")
+    .should("exist");
   });
 });
